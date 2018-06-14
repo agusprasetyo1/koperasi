@@ -10,12 +10,12 @@
   <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
   <title><?=$judul?></title>
   <!-- Icons-->
-  <link href="vendors/css/flag-icon.min.css" rel="stylesheet">
-  <link href="vendors/css/font-awesome.min.css" rel="stylesheet">
-  <link href="vendors/css/simple-line-icons.css" rel="stylesheet">
+  <link href="../vendors/css/flag-icon.min.css" rel="stylesheet">
+  <link href="../vendors/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../vendors/css/simple-line-icons.css" rel="stylesheet">
   <!-- Main styles for this application-->
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/pace.min.css" rel="stylesheet">
+  <link href="../css/style.min.css" rel="stylesheet">
+  <link href="../css/pace.min.css" rel="stylesheet">
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
@@ -24,8 +24,8 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="#">
-      <img class="navbar-brand-full" src="img/logo.png" width="150" height="50" alt="CoreUI Logo">
-      <img class="navbar-brand-minimized" src="img/favicon.png" width="45" height="45" alt="CoreUI Logo">
+      <img class="navbar-brand-full" src="../img/logo.png" width="150" height="50" alt="CoreUI Logo">
+      <img class="navbar-brand-minimized" src="../img/favicon.png" width="45" height="45" alt="CoreUI Logo">
     </a>
     <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
       <span class="navbar-toggler-icon"></span>

@@ -4,7 +4,7 @@
         <ul class="nav">
           <li class="nav-title">Theme</li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="index.php">
               <i class="nav-icon icon-speedometer"></i> Dashboard</a>
           </li>
           <li class="nav-item nav-dropdown">
@@ -20,32 +20,46 @@
                   <i class="nav-icon fa fa-users"></i> Anggota</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="unitkerja.php">
                   <i class="nav-icon icon-settings"></i> Unit Kerja</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="barang.php">
                   <i class="nav-icon fa fa-dropbox"></i> Barang</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="jenisbarang.php">
                   <i class="nav-icon  fa fa-list-ul"></i> Jenis Barang</a>
               </li>
             </ul>
           </li>
           <li class="nav-item nav-dropdown">
               <a class="nav-link nav-dropdown-toggle" href="#">
-                <i class="nav-icon fa fa-money"></i> Pembelian</a>
+                <i class="nav-icon fa fa-cart-arrow-down"></i> Pembelian</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
                   <a class="nav-link" href="#">
                     <i class="nav-icon fa fa-cart-plus"></i> Pembelian Umum</a>
-                </li>
-                <li class="nav-item">
+              </li>
+              <li class="nav-item">
                   <a class="nav-link" href="#">
                     <i class="nav-icon fa fa-cart-plus"></i> Pembelian Anggota</a>
-                </li>
+              </li>
             </ul>              
+          </li>
+          <li class="nav-item nav-dropdown">
+             <a class="nav-link nav-dropdown-toggle" href="#">
+             <i class="nav-icon fa fa-money"></i> Pembayaran</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                  <a class="nav-link" href="#">
+                  <i class="nav-icon fa fa-handshake-o"></i> Langsung</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#">
+                  <i class="nav-icon fa fa-dollar"></i> Kredit</a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
