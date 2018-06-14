@@ -31,7 +31,7 @@
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <i class="icon-user"></i>
+                      <i class="icon-user">ds</i>
                     </span>
                   </div>
                   <input type="text" class="form-control" placeholder="Username" aria-describedby="helpId" required>
