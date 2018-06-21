@@ -2,7 +2,7 @@
     <div class="sidebar">
       <nav class="sidebar-nav">
         <ul class="nav">
-          <li class="nav-title">Theme</li>
+          <li class="nav-title">Menu</li>
           <li class="nav-item">
             <a class="nav-link" href="index.php">
               <i class="nav-icon icon-speedometer"></i> Dashboard</a>
@@ -12,11 +12,11 @@
               <i class="nav-icon fa fa-laptop"></i> Administrasi</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="user.php">
                   <i class="nav-icon icon-user"></i> Pengguna</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="anggota.php">
                   <i class="nav-icon fa fa-users"></i> Anggota</a>
               </li>
               <li class="nav-item">
@@ -38,7 +38,7 @@
                 <i class="nav-icon fa fa-cart-arrow-down"></i> Pembelian</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                  <a class="nav-link" href="#">
+                  <a class="nav-link" href="pembelianumum.php">
                     <i class="nav-icon fa fa-cart-plus"></i> Pembelian Umum</a>
               </li>
               <li class="nav-item">

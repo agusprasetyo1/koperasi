@@ -15,6 +15,7 @@
   <link href="../vendors/css/simple-line-icons.css" rel="stylesheet">
   <!-- Main styles for this application-->
   <link href="../css/style.min.css" rel="stylesheet">
+  <link href="../css/costum.css" rel="stylesheet">
   <link href="../css/pace.min.css" rel="stylesheet">
 </head>
 
