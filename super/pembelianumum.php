@@ -98,7 +98,45 @@
 </div>
     <!-- modal -->
     <?php
+    $q1 = mysqli_query($koneksi, "SELECT * from detil_jual_umum d inner join barang b on d.id_barang = b.id_barang where status = '0'");
+
+        if (isset($_POST['bayarkeranjang'])) {
+
+            $i = 0;
+        
+            while ($i < $jmlkeranjang) {
+                $id_barang = $_POST['id_barang'][$i];
+                $id_umum = $_POST['id_detil_umum'][$i];
+                $jumlah_beli = $_POST['stok_beli'][$i];
+                $harga = $_POST['harga'][$i];
+                $total = $jumlah_beli * $harga;
+                $update = "UPDATE detil_jual_umum set jumlah = '$jumlah_beli', sub_total = '$total' where id_detil_umum = '$id_umum' and status = '0' "; 
+                mysqli_query($koneksi, $update);
+                echo "
+                    <script>
+                        window.location = 'keranjang_bayarumum.php';
+                    </script>
+                ";
+
+                $i++;
+            }
+        }
+    ?>
+
+    <?php
         if (isset($_POST['msk_keranjang'])) {
+            $cek_idbrg = $_POST['id_barang'];
+            $q = mysqli_query($koneksi, "SELECT id_barang, status from detil_jual_umum where status = '0' and id_barang = '$cek_idbrg' ");
+            $cek = mysqli_num_rows($q);
+    
+            if ($cek > 0) {
+                echo "
+                <script>
+                    alert('Data sudah masuk keranjang');
+                    window.location = 'pembelianumum.php';
+                </script>
+                ";
+            }else{
             if (tambah_keranjang_umum($_POST) > 0) {
                 echo "
                     <script>
@@ -108,14 +146,15 @@
                 ";
             }else{
                 echo "
-                    <script>
-                        alert('Input keranjang gagal');
-                        // document.location.href = 'tambahanggota.php';            
-                    </script>
-            ";
-            echo("<br>");
+                <script>
+                // alert('Input keranjang gagal');
+                // document.location.href = 'tambahanggota.php';            
+                </script>
+                ";
             echo mysqli_error($koneksi);        
+            echo("<br>");
             }
+        }
         }
         ?>  
 <?php

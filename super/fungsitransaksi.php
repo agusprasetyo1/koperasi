@@ -87,4 +87,18 @@
         return mysqli_affected_rows($koneksi);
     }
 
+    function bayar_keranjang_umum($data){
+        global $koneksi;
+        $id_jual_umum = $data['id_jual_umum'];
+        $total_semua = $data['semua'];
+        $tanggal = date("Y-m-d");
+
+        $query1 = "INSERT into jual_umum values ('$id_jual_umum', '$tanggal', '$total_semua') ";
+        $query2 = "UPDATE detil_jual_umum SET status = '1' where id_jual_umum = '$id_jual_umum' and status = '0' ";
+        mysqli_query($koneksi, $query1);
+        mysqli_query($koneksi, $query2);
+
+        return mysqli_affected_rows($koneksi);
+    }
+
 ?>

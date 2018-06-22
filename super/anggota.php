@@ -56,7 +56,7 @@
                     <td><?=$data['tempat']?>, <?=date("d-m-Y", strtotime($data['tgl_lahir']))?></td>
                     <td><?=$data['jenis_kelamin']?></td>
                     <td><?=$data['alamat']?></td>
-                    <td><?=$data['tgl_jadi_anggota']?></td>
+                    <td><?= date("d-m-Y", strtotime($data['tgl_jadi_anggota'])) ?></td>
                     <td><img src="../img/anggota/<?=$data['gambar']?>" alt="" height="130" width="100"></td>
                     <td>
                         <div class="btn-group">

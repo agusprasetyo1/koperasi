@@ -42,7 +42,7 @@
                     <i class="nav-icon fa fa-cart-plus"></i> Pembelian Umum</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="#">
+                  <a class="nav-link" href="pembeliananggota.php">
                     <i class="nav-icon fa fa-cart-plus"></i> Pembelian Anggota</a>
               </li>
             </ul>              
