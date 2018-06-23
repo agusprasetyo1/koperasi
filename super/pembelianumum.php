@@ -166,7 +166,7 @@
             $(document).on('click','.edit-keranjang',function(e){
                 e.preventDefault();
                 $("#modalKeranjang").modal('show');
-                $.post('proseskeranjang.php',
+                $.post('proseskeranjangumum.php',
                     {id:$(this).attr('data-id')},
                     function(html){
                         $(".modal-body").html(html);

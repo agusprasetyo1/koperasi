@@ -32,10 +32,10 @@
         global $koneksi;
         $id = htmlspecialchars($data['id_unit_kerja']);
         $unitkerja = htmlspecialchars($data['unit_kerja']);
+        $gaji_pokok = $data['gaji_pokok'];
         
-        $query = "INSERT INTO unit_kerja VALUES ('$id', '$unitkerja')";
+        $query = "INSERT INTO unit_kerja VALUES ('$id', '$unitkerja', '$gaji_pokok')";
         $data = mysqli_query($koneksi, $query);
-        // var_dump($data);
         return mysqli_affected_rows($koneksi);
     }
 
@@ -52,9 +52,11 @@
         global $koneksi;
         $id = $data['id_unit_kerja'];
         $unitkerja = htmlspecialchars($data['unit_kerja']);
+        $gaji_pokok = $data['gaji_pokok'];
         
         $query = "UPDATE unit_kerja SET
-            unit_kerja = '$unitkerja'
+            unit_kerja = '$unitkerja',
+            gaji_pokok = '$gaji_pokok'
             WHERE id_unit_kerja = '$id' ";
 
         mysqli_query($koneksi, $query);

@@ -23,6 +23,7 @@
                     <th>No</th>
                     <th>ID Unit Kerja</th>
                     <th>Unit Kerja</th>
+                    <th>Gaji Pokok</th>
                     <th>Aksi</th>
                 </tr>
                 <?php
@@ -33,6 +34,7 @@
                     <td><?=$i++?>.</td>
                     <td><?=$data['id_unit_kerja']?></td>
                     <td><?=$data['unit_kerja']?></td>
+                    <td>Rp<?=number_format($data['gaji_pokok'], 0, ",", ".")?></td>
                     <td>
                         <div class="btn-group">
                             <a href="editunit.php?id=<?=$data['id_unit_kerja']?>"  class="btn btn-info">Edit</a>

@@ -22,8 +22,6 @@
     <div class="row justify-content-center">
         <div class="col-sm-12 col-lg-12 ">
             <a href="tambahbarang.php" class="btn btn-primary mb-2">Tambah data</a>
-            <a href="#" class="btn btn-primary mb-2">Edit Stok</a>
-
             <div style="float:right;">
                 <form action="" method="post" class="input-group btn-group form-inline  " >
                     <input type="text" size="25" name="inputcari" id="inputcari" class="form-control" placeholder="Masukan nama barang"  required>
@@ -64,6 +62,7 @@
                             <a href="editbarang.php?id=<?=$data['id_barang']?>"  class="btn btn-info">Edit</a>
                             <a href="hapusbarang.php?id=<?=$data['id_barang']?>" onclick="return confirm('Apakah anda ingin menghapus data ini ?')" class="btn btn-danger">Hapus</a>
                         </div>
+                            <a href="?tambah=<?=$data['id_barang']?>" class="btn btn-primary btn-block mt-1">Tambah Stok</a>
                     </td>
                 </tr>
                     <?php } ?>
@@ -71,6 +70,14 @@
         </div>
     </div>
 </div>
+<?php
+
+if (isset($_GET['tambah'])) {
+    $ambil = $_GET['tambah'];
+    echo $ambil;
+    }
+?>
+
 <?php
     include "template/footer.php";
 ?>

@@ -29,6 +29,10 @@
                         <input type="text" class="form-control" name="unit_kerja" id="unitkerja" value="<?=$data['unit_kerja']?>" required>
                     </div>
                     <div class="form-group">
+                        <label for="gajipokok">Gaji Pokok</label>
+                        <input type="number" class="form-control" name="gaji_pokok" id="gajipokok" min="100000" value="<?=$data['gaji_pokok']?>" required>
+                    </div>
+                    <div class="form-group">
                         <input type="submit" class="form-control btn btn-success" name="submit" value="Simpan">
                     </div>
                     </form>

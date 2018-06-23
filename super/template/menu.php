@@ -47,19 +47,9 @@
               </li>
             </ul>              
           </li>
-          <li class="nav-item nav-dropdown">
-             <a class="nav-link nav-dropdown-toggle" href="#">
-             <i class="nav-icon fa fa-money"></i> Pembayaran</a>
-            <ul class="nav-dropdown-items">
-              <li class="nav-item">
-                  <a class="nav-link" href="#">
-                  <i class="nav-icon fa fa-handshake-o"></i> Langsung</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="#">
-                  <i class="nav-icon fa fa-dollar"></i> Kredit</a>
-              </li>
-            </ul>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="nav-icon fa fa-dollar"></i> Data Gaji Anggota</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
