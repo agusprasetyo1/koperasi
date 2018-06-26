@@ -59,10 +59,10 @@
                     <td><img src="../img/barang/<?=$data['gambar']?>" alt="" height="100" width="90"></td>
                     <td>
                         <div class="btn-group">
-                            <a href="editbarang.php?id=<?=$data['id_barang']?>"  class="btn btn-info">Edit</a>
+                            <a href="editbarang.php?id=<?=$data['id_barang']?>"  class="btn btn-info ">Edit</a>
                             <a href="hapusbarang.php?id=<?=$data['id_barang']?>" onclick="return confirm('Apakah anda ingin menghapus data ini ?')" class="btn btn-danger">Hapus</a>
                         </div>
-                            <a href="?tambah=<?=$data['id_barang']?>" class="btn btn-primary btn-block mt-1">Tambah Stok</a>
+                            <a href="tambahstok.php?id=<?=$data['id_barang']?>" class="btn btn-primary btn-block mt-1">Tambah Stok</a>
                     </td>
                 </tr>
                     <?php } ?>
@@ -70,13 +70,6 @@
         </div>
     </div>
 </div>
-<?php
-
-if (isset($_GET['tambah'])) {
-    $ambil = $_GET['tambah'];
-    echo $ambil;
-    }
-?>
 
 <?php
     include "template/footer.php";

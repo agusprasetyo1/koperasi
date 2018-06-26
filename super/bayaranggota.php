@@ -1,21 +1,37 @@
 <?php
-    ini_set("display_errors", 0);
-    $ambil_id = $_GET['id_ang'];
+// ini_set("display_errors", 0);
 
-    $judul = "Koperasi Bahagia";
-    $lokasi1 = "Pembelian";
-    $lokasi2 = "Pembelian Anggota";
-    $lokasi3 = "Bayar Anggota";
-    $linklokasi2 = "pembeliananggota.php";
-    $linklokasi3 = "";
-    include "template/header.php";
-    include "template/menu.php";
-    include "template/lokasi.php";
-    include "fungsitransaksi.php";
-    $id = $_GET['id_barang'];
-    $kode = kodejualanggota();
-    $data = query("SELECT * from barang where id_barang = '$id' ")[0];
-?>
+$judul = "Koperasi Bahagia";
+$lokasi1 = "Pembelian";
+$lokasi2 = "Pembelian Anggota";
+$lokasi3 = "Bayar Anggota";
+$linklokasi2 = "pembeliananggota.php";
+$linklokasi3 = "";
+include "template/header.php";
+include "template/menu.php";
+include "template/lokasi.php";
+include "fungsitransaksi.php";
+$id = $_GET['id_barang'];
+$ambil_id = 'AG001';    
+// $ambil_id = $_GET['id_ang'];    
+$kode = kodejualanggota();
+$ambiltgl = 9;
+// $ambiltgl = date("m");
+
+$data = query("SELECT * from barang where id_barang = '$id' ")[0];
+$gaji_anggota = query("SELECT * from anggota a inner join unit_kerja u on a.id_unit_kerja = u.id_unit_kerja where id_anggota = '$ambil_id' ")[0];
+$z = mysqli_query($koneksi ,"SELECT a.id_anggota ,sum(potongan) as 'ptg', g.tgl_potong  from gaji g inner join anggota a on g.id_anggota = a.id_anggota WHERE a.id_anggota = '$ambil_id' and month(tgl_potong) = '$ambiltgl'  group by g.id_anggota, month(tgl_potong) " );
+$totalpotong = mysqli_fetch_assoc($z);
+    echo "<pre>";
+        var_dump($totalpotong);
+        var_dump($ambiltgl);
+    echo "</pre>";
+    
+        foreach($_GET as $parameter => $isi){
+	        echo "<br>$parameter : $isi";
+        }
+
+    ?>
 
     <div class="container-fluid">
         <h2 align="center" class="pt-3 pb-3">Pembayaran Umum</h2>
@@ -95,6 +111,8 @@
                             <input type="hidden" name="harga_jual" id="harga_jual" value="<?=$data['harga_jual']?>">
                             <input type="hidden" name="subtotal" id="subtotal" >
                             <input type="hidden" name="tanggal" value="<?= date("Y-m-d") ?>">
+                            <input type="hidden" name="gaji_pokok" value="<?= $gaji_anggota['gaji_pokok'] ?>">
+                            <input type="hidden" name="potongan_gaji" value="<?= $total_potong['potongan_gaji'] ?>">
 
                             <div align="center">
                                 <input type="submit" name="proses" value="Bayar Langsung" class="btn btn-success form-control mb-2">
@@ -108,7 +126,10 @@
         </div>
     </div>
 <?php
-    $bayar = $_POST['bayar'];
+
+    
+
+$bayar = $_POST['bayar'];
     $subtotal = $_POST['subtotal'];
 
 
@@ -124,7 +145,7 @@
             // echo "<pre>";
             //     var_dump($_POST);
             // echo "<pre>";
-            if (bayaranggota($_POST) > 0) {
+            if (bayarlangsung_anggota($_POST) > 0) {
             echo "
                 <script>
                     alert('Pembayaran sukses');
@@ -135,7 +156,7 @@
             echo "
             <script>
                 alert('Pembayaran gagal');
-                // document.location.href = 'tambahbarang.php';            
+                document.location.href = 'tambahbarang.php';            
             </script>
             ";
             echo("<br>");
@@ -143,9 +164,13 @@
             }
         }
     }else if(isset($_POST['potonggaji'])){
+       
+        // echo "<pre>";
+            //     var_dump($_POST);
+            // echo "</pre>";
         echo "
                 <script>
-                    alert('POTONG GAJI');
+                    // alert('POTONG GAJI');
                 </script>
             ";
     }else if(isset($_POST['kredit'])){

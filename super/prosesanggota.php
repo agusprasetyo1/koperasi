@@ -39,7 +39,7 @@
 
             <div class="btn-group mt-3">
             <button type="submit" name="msk_keranjang" class="btn keranjang">Masukan Keranjang <i class="fa fa-cart-arrow-down"></i></button>
-                <a href="bayaranggota.php?id_barang=<?=$id?>&id_ang=<?=$ambil?>" class="btn bayar">Bayar
+                <a href="bayaranggota.php?id_ang=<?=$ambil?>&id_barang=<?=$id?>" class="btn bayar">Bayar
                     <i class="fa fa-money"></i>
                 </a>
             </div>  

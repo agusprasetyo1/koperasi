@@ -153,7 +153,7 @@
                 mysqli_query($koneksi, $query);
                 $i++;
             }
-            if (bayar_keranjang_anggota($_POST) > 0) {
+            if (bayarlangsung_keranjang_anggota($_POST) > 0) {
                 echo "
                 <script>
                     alert('Pembayaran sukses');

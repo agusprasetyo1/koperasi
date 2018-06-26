@@ -459,4 +459,16 @@
 
         return mysqli_affected_rows($koneksi);
     }
+
+    function tambahstok($data){
+        global $koneksi;
+        $id_brng = $data['id_barang'];
+        $stokawal = $data['stokawal'];
+        $jumlah_tambah = $data['jumlah'];
+        $total = $stokawal + $jumlah_tambah;
+
+        $query = "UPDATE barang SET stok = '$total' WHERE id_barang = '$id_brng' ";
+        mysqli_query($koneksi, $query);
+        return mysqli_affected_rows($koneksi);
+    }
 ?>

@@ -10,7 +10,7 @@
     include "template/lokasi.php";
     include "fungsitransaksi.php";
     
-    $anggota = query("SELECT * from anggota a inner join unit_kerja u on a.id_unit_kerja = u.id_unit_kerja order by id_anggota");
+    $anggota = query("SELECT * from anggota a inner join unit_kerja u on a.id_unit_kerja = u.id_unit_kerja order by a.id_unit_kerja ASC");
     if (isset($_POST['cari'])) {
         $anggota = carianggota($_POST['inputcari']);
     }

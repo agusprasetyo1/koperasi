@@ -48,8 +48,8 @@
             </ul>              
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="nav-icon fa fa-dollar"></i> Data Gaji Anggota</a>
+            <a class="nav-link" href="potonggaji.php">
+              <i class="nav-icon fa fa-dollar"></i> Potong Gaji Anggota</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">

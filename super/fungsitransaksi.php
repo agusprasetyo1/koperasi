@@ -135,7 +135,7 @@
     }
 
     //bayar Anggota
-    function bayaranggota($data){
+    function bayarlangsung_anggota($data){
         global $koneksi;
         
         $id_jual_anggota = $data['id_jual_anggota'];
@@ -160,7 +160,8 @@
         return mysqli_affected_rows($koneksi);        
     }
 
-    function bayar_keranjang_anggota($data){
+    //Bayar keranjang anggota
+    function bayarlangsung_keranjang_anggota($data){
         global $koneksi;
 
         $id_jual_anggota = $data['id_jual_anggota'];
@@ -175,6 +176,32 @@
         mysqli_query($koneksi, $query2);
 
         return mysqli_affected_rows($koneksi);
+    }
+
+    function potonggaji($data){
+        global $koneksi;
+        
+        $id_jual_anggota = $data['id_jual_anggota'];
+        $tgl_trak = $data['tanggal'];
+
+        $id_anggota = $data['id_anggota'];
+        $id_user = $data['id_user'];
+        $harga = $data['harga_jual'];
+        $jumlah = $data['beli_stok'];
+        $total = $data['subtotal'];
+        $id_barang = $data['id_barang'];
+
+        $sisastok = $data['stok_awal'] - $data['beli_stok'];
+
+        $query1 = "INSERT into jual_anggota values ('$id_jual_anggota', '$tgl_trak', '$total')";
+        $query2 = "INSERT into detil_jual_anggota values ('', '$id_barang', '$id_jual_anggota', '$id_anggota', '$id_user', '$harga', '$jumlah', '$total', '1 ')";
+        $query3 = "UPDATE barang SET stok = '$sisastok' where id_barang = '$id_barang' ";
+        // $query4 = "INSERT into gaji"
+        $data1 = mysqli_query($koneksi, $query1);
+        $data2 = mysqli_query($koneksi, $query2);
+        $data3 = mysqli_query($koneksi, $query3);
+
+        return mysqli_affected_rows($koneksi);        
     }
     
 
