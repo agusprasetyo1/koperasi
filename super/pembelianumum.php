@@ -33,10 +33,8 @@
                 </div>
 
                 <div>
-                    <font style="font-size:15px;color:#696969"> Keranjang <b> <?=$jmlkeranjang?> </b> Barang 
-                    </font>
+                    <font style="font-size:15px;color:#696969"> Keranjang <b> <?=$jmlkeranjang?> </b> Barang </font>
                     <a href="#" data-id="0" class="card-link edit-keranjang btn btn-info"><i class="fa fa-cart-plus"></i></a>
-                    
                 </div>
             </div>        
         </div>
@@ -63,7 +61,7 @@
         </a>
     </div>
     <!-- Modal BARANG -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">

@@ -118,7 +118,7 @@
                                 <input type="submit" name="proses" value="Bayar Langsung" class="btn btn-success form-control mb-2">
                                 <input type="submit" name="potonggaji" value="Potong Gaji" class="btn btn-warning pl-4 pr-4">
                                 <input type="submit" name="kredit" value="Kredit" class="btn btn-info pr-4 pl-4">
-                            </div>
+                        </div>
 
                         <input type="hidden" name="semua" id="semua" value="<?=$total_semua?>">
                         <input type="hidden" name="id_jual_anggota" value="<?=$kode?>">

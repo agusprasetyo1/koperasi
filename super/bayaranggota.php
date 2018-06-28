@@ -11,95 +11,103 @@ include "template/header.php";
 include "template/menu.php";
 include "template/lokasi.php";
 include "fungsitransaksi.php";
-$id = $_GET['id_barang'];
-$ambil_id = 'AG001';    
-// $ambil_id = $_GET['id_ang'];    
-$kode = kodejualanggota();
-$ambiltgl = 9;
-// $ambiltgl = date("m");
+$id = $_GET['id_barang']; //Mengambil id barang
+$ambil_id = $_GET['id_ang']; //MEngambil ID anggota
+$kode = kodejualanggota(); //kode jual anggota
+$ambiltgl = date("m");
+$ambilthn = date("Y");
 
 $data = query("SELECT * from barang where id_barang = '$id' ")[0];
 $gaji_anggota = query("SELECT * from anggota a inner join unit_kerja u on a.id_unit_kerja = u.id_unit_kerja where id_anggota = '$ambil_id' ")[0];
-$z = mysqli_query($koneksi ,"SELECT a.id_anggota ,sum(potongan) as 'ptg', g.tgl_potong  from gaji g inner join anggota a on g.id_anggota = a.id_anggota WHERE a.id_anggota = '$ambil_id' and month(tgl_potong) = '$ambiltgl'  group by g.id_anggota, month(tgl_potong) " );
-$totalpotong = mysqli_fetch_assoc($z);
-    echo "<pre>";
-        var_dump($totalpotong);
-        var_dump($ambiltgl);
-    echo "</pre>";
-    
-        foreach($_GET as $parameter => $isi){
-	        echo "<br>$parameter : $isi";
+$q = mysqli_query($koneksi ,"SELECT a.id_anggota ,sum(potongan) as 'ptg', g.tgl_potong  from gaji g inner join anggota a on g.id_anggota = a.id_anggota WHERE 
+                a.id_anggota = '$ambil_id' and month(tgl_potong) = '$ambiltgl' and year(tgl_potong) = '$ambilthn'  group by g.id_anggota, month(tgl_potong), year(tgl_potong) " );
+$potonggaji = mysqli_fetch_assoc($q);
+$cek = mysqli_num_rows($q);
+    if (isset($_GET['id_ang'])) {
+        if ($cek == 1) {
+            $total_potongan = $potonggaji['ptg'];
+        }else{
+            echo "Tidak ada";
         }
+    }
 
     ?>
 
     <div class="container-fluid">
-        <h2 align="center" class="pt-3 pb-3">Pembayaran Umum</h2>
-        <hr>
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="../img/barang/<?=$data['gambar']?>" width="270" height="300" alt="">    
-                    </div>
-                    <div class="col-md-4">
-                        <form action="" method="post" name="bayarumum">
-                        <div class="form-group">
-                            <div>
-                                Nama barang
-                            </div>
-                            <div class="text-value">
-                                <?=$data['nama_barang']?>
-                            </div>
+            <h2 align="center" class="pt-3 pb-3">Pembayaran Umum</h2>
+            <hr>
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="../img/barang/<?=$data['gambar']?>" width="270" height="300" alt="">
                         </div>
-                        <div class="form-group">
-                            <div>
-                                Harga
-                            </div>
-                            <div class="text-value">
-                                Rp<?= number_format($data['harga_jual'],0,",",".")?>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="stok">Jumlah Stok Beli</label>
-                            <div class="card-group">
-                                <input type="number" class="form-control" style="width:100px;" value="1" autofocus name="beli_stok" min="1" max="<?=$data['stok']?>" id="beli_stok" onFocus="mulaihitung();" onBlur="stophitung();">
-                                <font style="margin-top:6px;">&nbsp;<?=$data['keterangan_stok']?></font>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div>
-                                Subtotal
-                            </div>
-                            <div class="text-value input-group">
-                                    <font>Rp </font> 
-                                    <font name="subtotal" id="subtotal"></font> 
+                        <div class="col-md-4">
+                            <form action="" method="post" name="bayarumum">
+                                <div class="form-group">
+                                    <div>
+                                        Nama barang
+                                    </div>
+                                    <div class="text-value">
+                                        <?=$data['nama_barang']?>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <div>
+                                        Harga
+                                    </div>
+                                    <div class="text-value">
+                                        Rp
+                                        <?= number_format($data['harga_jual'],0,",",".")?>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="stok">Jumlah Stok Beli</label>
+                                    <div class="card-group">
+                                        <input type="number" class="form-control" style="width:100px;" value="1" autofocus name="beli_stok" min="1" max="<?=$data['stok']?>"
+                                            id="beli_stok" onFocus="mulaihitung();" onBlur="stophitung();">
+                                        <font style="margin-top:6px;">&nbsp;
+                                            <?=$data['keterangan_stok']?>
+                                        </font>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        Subtotal
+                                    </div>
+                                    <div class="text-value input-group">
+                                        <font>Rp </font>
+                                        <font name="subtotal" id="subtotal"></font>
+                                    </div>
+                                </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <div>
                                     <label for="bayar">Bayar</label>
-                                    <input type="text" class="form-control" name="bayar" autocomplete = "off" id="bayar" onFocus="mulaihitung();" onBlur="stophitung();" required>
+                                    <input type="text" class="form-control" name="bayar" autocomplete="off" id="bayar" onFocus="mulaihitung();" onBlur="stophitung();"
+                                        required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                    Harga
-                                    <div style="float:right;font-size:15px;font-weight:700">
-                                        Rp<?= number_format($data['harga_jual'],0, ",", ".")?>
-                                    </div>
+                                Harga
+                                <div style="float:right;font-size:15px;font-weight:700">
+                                    Rp
+                                    <?= number_format($data['harga_jual'],0, ",", ".")?>
+                                </div>
                             </div>
                             <div class="form-group">
-                                Subtotal                                
+                                Subtotal
                                 <div style="float:right;font-size:15px;font-weight:700">
-                                    Rp<font id="subtotal2"></font>
+                                    Rp
+                                    <font id="subtotal2"></font>
                                 </div>
                             </div>
                             <div class="form-group">
                                 Kembali
                                 <div style="float:right;font-size:15px;font-weight:700">
-                                    Rp<font id="kembali"></font>
+                                    Rp
+                                    <font id="kembali"></font>
                                 </div>
                             </div>
 
@@ -109,23 +117,36 @@ $totalpotong = mysqli_fetch_assoc($z);
                             <input type="hidden" name="stok_awal" value="<?=$data['stok']?>">
                             <input type="hidden" name="id_barang" value="<?=$id?>">
                             <input type="hidden" name="harga_jual" id="harga_jual" value="<?=$data['harga_jual']?>">
-                            <input type="hidden" name="subtotal" id="subtotal" >
-                            <input type="hidden" name="tanggal" value="<?= date("Y-m-d") ?>">
-                            <input type="hidden" name="gaji_pokok" value="<?= $gaji_anggota['gaji_pokok'] ?>">
-                            <input type="hidden" name="potongan_gaji" value="<?= $total_potong['potongan_gaji'] ?>">
+                            <input type="hidden" name="subtotal" id="subtotal">
+                            <input type="hidden" name="tanggal" value="<?= date(" Y-m-d ") ?>">
 
                             <div align="center">
                                 <input type="submit" name="proses" value="Bayar Langsung" class="btn btn-success form-control mb-2">
-                                <input type="submit" name="potonggaji" value="Potong Gaji" class="btn btn-warning pl-4 pr-4">
+                                <a href="#" data-id="<?=$ambil_id?>" class="btn btn-warning pl-4 pr-4 potong-gaji">Potong Gaji</a>
                                 <input type="submit" name="kredit" value="Kredit" class="btn btn-info pr-4 pl-4">
                             </div>
+                        </div>
+                        </form>
                     </div>
-                    </form>
                 </div>
+            </div>
+    </div>
+    <div class="modal fade" id="potonggaji" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Pilih Aksi</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body mt-3 mb-1"></div>
+                <div class="modal-footer"></div>
             </div>
         </div>
     </div>
-<?php
+    <?php
 
     
 
@@ -138,7 +159,7 @@ $bayar = $_POST['bayar'];
             echo "
                 <script>
                     alert('Harap menginputkan jumlah bayar dengan benar');
-                    window.location('bayarumum.php?id=$id');
+                    window.location('bayaranggota.php?id=$id');
                 </script>
             ";
         }else{
@@ -164,14 +185,13 @@ $bayar = $_POST['bayar'];
             }
         }
     }else if(isset($_POST['potonggaji'])){
-       
-        // echo "<pre>";
-            //     var_dump($_POST);
-            // echo "</pre>";
+        echo "<pre>";
+                var_dump($_POST);
+            echo "</pre>";
         echo "
-                <script>
-                    // alert('POTONG GAJI');
-                </script>
+            <script>
+                // alert('POTONG GAJI');
+            </script>
             ";
     }else if(isset($_POST['kredit'])){
         echo "
@@ -181,29 +201,49 @@ $bayar = $_POST['bayar'];
             ";
     }
 ?>
-<script>
-    function mulaihitung(){
-        interval = setInterval("hitung()",1);
-    }
-    function hitung(){
-        stok = document.bayarumum.beli_stok.value;
-        hargajual = document.bayarumum.harga_jual.value; 
-        bayar = document.bayarumum.bayar.value; 
-        subtotal = stok * hargajual;
-        document.bayarumum.subtotal.value = subtotal; 
-        document.getElementById('subtotal').innerHTML = subtotal;
-        document.getElementById('subtotal2').innerHTML = subtotal;
-        if (bayar >= subtotal) {
-            kembali = bayar - subtotal
-            document.getElementById('kembali').innerHTML = kembali;
-        }else{
-            document.getElementById('kembali').innerHTML = 0;
-        }    
-}
-function stophitung(){
-    clearInterval(interval);}
-</script>
 
-<?php
-    include "template/footer.php";
-?>
+        <script>
+            function mulaihitung() {
+                interval = setInterval("hitung()", 1);
+            }
+
+            function hitung() {
+                stok = document.bayarumum.beli_stok.value;
+                hargajual = document.bayarumum.harga_jual.value;
+                bayar = document.bayarumum.bayar.value;
+                subtotal = stok * hargajual;
+                document.bayarumum.subtotal.value = subtotal;
+                document.getElementById('subtotal').innerHTML = subtotal;
+                document.getElementById('subtotal2').innerHTML = subtotal;
+                if (bayar >= subtotal) {
+                    kembali = bayar - subtotal
+                    document.getElementById('kembali').innerHTML = kembali;
+                } else {
+                    document.getElementById('kembali').innerHTML = 0;
+                }
+            }
+
+            function stophitung() {
+                clearInterval(interval);
+            }
+        </script>
+
+        <?php
+        include "template/footer.php";
+    ?>
+            <script>
+                //Barang
+                $(function () {
+                    $(document).on('click', '.potong-gaji', function (e) {
+                        e.preventDefault();
+                        $("#potonggaji").modal('show');
+                        $.post('prosespotong.php', {
+                                id: $(this).attr('data-id')
+                            },
+                            function (html) {
+                                $(".modal-body").html(html);
+                            }
+                        );
+                    });
+                });
+            </script>

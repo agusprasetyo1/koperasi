@@ -10,11 +10,10 @@
     include "template/lokasi.php";
     include "fungsitransaksi.php";
 
-    $bln = 02;
+    // $bln = 02;
     $gaji = query("SELECT a.*, g.*, u.nama as 'nama_user', sum(potongan) as 'potongan_gaji'  from gaji g inner join anggota a on g.id_anggota = a.id_anggota 
-                    inner join user u on g.id_user = u.id_user group by g.id_anggota, month(tgl_potong) order by tgl_potong");
+                    inner join user u on g.id_user = u.id_user group by g.id_anggota, month(tgl_potong), year(tgl_potong) order by tgl_potong");
 ?>
-
 <div class="container-fluid">
     <h2 align="center" class="pt-3 pb-3">Data potong gaji</h2>
     <div class="row justify-content-center">
