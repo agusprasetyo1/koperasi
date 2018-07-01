@@ -39,8 +39,9 @@
         } 
         
         ?>
-            <div class="btn-group mt-3">
-                <button type="submit" name="bayarkeranjang" class="btn keranjang">Bayar <i class="fa fa-cart-arrow-down"></i></button>
+            <div class="col-md-12 btn-group mt-3 justify-content-center">
+                <button type="submit" name="bayarlangsung" class="btn keranjang">Bayar Langsung <i class="fa fa-cart-arrow-down"></i></button>
+                <button type="submit" name="potonggaji" style="color:black;background:#dfc800"  class="btn ">Potong Gaji <i class="fa fa-dollar"></i></button>
             </form>
         </div>
             </div>

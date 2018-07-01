@@ -1,10 +1,10 @@
 <?php
-// ini_set("display_errors", 0);
+ini_set("display_errors", 0);
 
 $judul = "Koperasi Bahagia";
 $lokasi1 = "Pembelian";
 $lokasi2 = "Pembelian Anggota";
-$lokasi3 = "Bayar Anggota";
+$lokasi3 = "Bayar langsung";
 $linklokasi2 = "pembeliananggota.php";
 $linklokasi3 = "";
 include "template/header.php";
@@ -14,27 +14,12 @@ include "fungsitransaksi.php";
 $id = $_GET['id_barang']; //Mengambil id barang
 $ambil_id = $_GET['id_ang']; //MEngambil ID anggota
 $kode = kodejualanggota(); //kode jual anggota
-$ambiltgl = date("m");
-$ambilthn = date("Y");
 
 $data = query("SELECT * from barang where id_barang = '$id' ")[0];
-$gaji_anggota = query("SELECT * from anggota a inner join unit_kerja u on a.id_unit_kerja = u.id_unit_kerja where id_anggota = '$ambil_id' ")[0];
-$q = mysqli_query($koneksi ,"SELECT a.id_anggota ,sum(potongan) as 'ptg', g.tgl_potong  from gaji g inner join anggota a on g.id_anggota = a.id_anggota WHERE 
-                a.id_anggota = '$ambil_id' and month(tgl_potong) = '$ambiltgl' and year(tgl_potong) = '$ambilthn'  group by g.id_anggota, month(tgl_potong), year(tgl_potong) " );
-$potonggaji = mysqli_fetch_assoc($q);
-$cek = mysqli_num_rows($q);
-    if (isset($_GET['id_ang'])) {
-        if ($cek == 1) {
-            $total_potongan = $potonggaji['ptg'];
-        }else{
-            echo "Tidak ada";
-        }
-    }
-
-    ?>
+?>
 
     <div class="container-fluid">
-            <h2 align="center" class="pt-3 pb-3">Pembayaran Umum</h2>
+            <h2 align="center" class="pt-3 pb-3">Bayar langsung anggota</h2>
             <hr>
             <div class="row justify-content-center">
                 <div class="col-md-10">
@@ -122,8 +107,6 @@ $cek = mysqli_num_rows($q);
 
                             <div align="center">
                                 <input type="submit" name="proses" value="Bayar Langsung" class="btn btn-success form-control mb-2">
-                                <a href="#" data-id="<?=$ambil_id?>" class="btn btn-warning pl-4 pr-4 potong-gaji">Potong Gaji</a>
-                                <input type="submit" name="kredit" value="Kredit" class="btn btn-info pr-4 pl-4">
                             </div>
                         </div>
                         </form>
@@ -131,26 +114,11 @@ $cek = mysqli_num_rows($q);
                 </div>
             </div>
     </div>
-    <div class="modal fade" id="potonggaji" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Pilih Aksi</h4>
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                </div>
-                <div class="modal-body mt-3 mb-1"></div>
-                <div class="modal-footer"></div>
-            </div>
-        </div>
-    </div>
     <?php
 
     
 
-$bayar = $_POST['bayar'];
+    $bayar = $_POST['bayar'];
     $subtotal = $_POST['subtotal'];
 
 
@@ -163,9 +131,6 @@ $bayar = $_POST['bayar'];
                 </script>
             ";
         }else{
-            // echo "<pre>";
-            //     var_dump($_POST);
-            // echo "<pre>";
             if (bayarlangsung_anggota($_POST) > 0) {
             echo "
                 <script>
@@ -184,21 +149,6 @@ $bayar = $_POST['bayar'];
             echo mysqli_error($koneksi); 
             }
         }
-    }else if(isset($_POST['potonggaji'])){
-        echo "<pre>";
-                var_dump($_POST);
-            echo "</pre>";
-        echo "
-            <script>
-                // alert('POTONG GAJI');
-            </script>
-            ";
-    }else if(isset($_POST['kredit'])){
-        echo "
-                <script>
-                    alert('KREDIT');
-                </script>
-            ";
     }
 ?>
 
@@ -231,19 +181,3 @@ $bayar = $_POST['bayar'];
         <?php
         include "template/footer.php";
     ?>
-            <script>
-                //Barang
-                $(function () {
-                    $(document).on('click', '.potong-gaji', function (e) {
-                        e.preventDefault();
-                        $("#potonggaji").modal('show');
-                        $.post('prosespotong.php', {
-                                id: $(this).attr('data-id')
-                            },
-                            function (html) {
-                                $(".modal-body").html(html);
-                            }
-                        );
-                    });
-                });
-            </script>

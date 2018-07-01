@@ -11,8 +11,10 @@
     include "fungsitransaksi.php";
 
     // $bln = 02;
-    $gaji = query("SELECT a.*, g.*, u.nama as 'nama_user', sum(potongan) as 'potongan_gaji'  from gaji g inner join anggota a on g.id_anggota = a.id_anggota 
-                    inner join user u on g.id_user = u.id_user group by g.id_anggota, month(tgl_potong), year(tgl_potong) order by tgl_potong");
+    $gaji = query("SELECT a.*, g.*, sum(potongan) as 'potongan_gaji'  from gaji g inner join anggota a on g.id_anggota = a.id_anggota 
+             inner join detil_jual_anggota d on g.id_jual_anggota = d.id_jual_anggota WHERE d.status = '2' 
+             group by g.id_anggota, month(tgl_potong), year(tgl_potong) order by tgl_potong");
+    
 ?>
 <div class="container-fluid">
     <h2 align="center" class="pt-3 pb-3">Data potong gaji</h2>
@@ -23,15 +25,15 @@
                 <tr align="center">
                     <th>No</th>
                     <th>Nama Anggota</th>
-                    <th>Nama Kasir</th>
+                    <th>Unit Kerja</th>
                     <th>Gaji Awal</th>
                     <th>Jumlah Potongan</th>
                     <th>Gaji Bersih</th>
                     <th>Periode Gaji</th>
+                    <th>Aksi</th>
                 </tr>
                 <?php
                     $i = 1;
-                    $bulan;
                     foreach ($gaji as $data) {
                         $tgl = date("m", strtotime($data['tgl_potong']));
                         switch ($tgl) {
@@ -72,21 +74,59 @@
                                 $bulan = "Desember";
                                 break;                   
                         }
+
+                        $data1 = query("SELECT * from anggota a inner join unit_kerja u on a.id_unit_kerja = u.id_unit_kerja where a.id_anggota = '$data[id_anggota]' ")[0];
+                        $gajibersih = $data1['gaji_pokok'] - $data['potongan_gaji'];
+                        $ambilbulan = date("m", strtotime($data['tgl_potong']));
+                        $ambiltahun = date("Y", strtotime($data['tgl_potong']));
                 ?>
-                <tr align="center">
-                    <td><?=$i++?>.</td>
-                    <td><?=$data['nama']?></td>
-                    <td><?=$data['nama_user']?></td>
-                    <td>Rp<?=number_format($data['gaji'], 0, ",", ".")?></td>
-                    <td>Rp<?=number_format($data['potongan_gaji'], 0, ",", ".")?></td>
-                    <td>Rp<?=number_format($data['gajibersih'], 0, ",", ".")?></td>
-                    <td><?=$bulan?>-<?=date("Y", strtotime($data['tgl_potong']))?></td>
-                </tr>
+                        <tr align="center">
+                            <td><?=$i++?>.</td>
+                            <td><?=$data['nama']?></td>
+                            <td><?=$data1['unit_kerja']?></td>
+                            <td>Rp<?=number_format($data1['gaji_pokok'], 0, ",", ".")?></td>
+                            <td>Rp<?=number_format($data['potongan_gaji'], 0, ",", ".")?></td>
+                            <td>Rp<?=number_format($gajibersih, 0, ",", ".")?></td>
+                            <td><?=$bulan?>-<?=date("Y", strtotime($data['tgl_potong']))?></td>
+                            <td><a href="#" class="btn btn-info lihatdetil" id-anggota=<?=$data['id_anggota']?> bln="<?=$ambilbulan?>" thn="<?=$ambiltahun?>">Lihat Detil</a></td>
+                        </tr>
                     <?php } ?>
             </table>
+             <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </div>
 </div>
 <?php
     include "template/footer.php";
 ?>
+<script>
+    $(function(){
+        $(document).on('click','.lihatdetil',function(e){
+            e.preventDefault();
+            $("#myModal").modal('show');
+            $.post('prosesdetil.php',
+                {idanggota:$(this).attr('id-anggota'),
+                    ambilbln:$(this).attr('bln'),
+                    ambilthn:$(this).attr('thn') },
+                function(html){
+                    $(".modal-body").html(html);
+                }   
+            );
+        });
+    });
+</script>

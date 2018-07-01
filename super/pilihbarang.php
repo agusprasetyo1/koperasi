@@ -86,7 +86,7 @@
                                     <span class="sr-only">Close</span>
                                 </button>
                             </div>
-                            <div class="modal-body mt-3 mb-1">
+                            <div class="modal-body mt-1">
                             </div>
                             <div class="modal-footer">
                             </div>
@@ -102,7 +102,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Keranjang</h4>
+                    <h4 class="modal-title" id="myModalLabel">Pembayaran Keranjang</h4>
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
                         <span class="sr-only">Close</span>
@@ -119,8 +119,7 @@
     <?php
     $q1 = mysqli_query($koneksi, "SELECT * from detil_jual_anggota d inner join barang b on d.id_barang = b.id_barang where status = '0'");
 
-        if (isset($_POST['bayarkeranjang'])) {
-
+        if (isset($_POST['bayarlangsung'])) {
             $i = 0;
         
             while ($i < $jmlkeranjang) {
@@ -131,9 +130,6 @@
                 $total = $jumlah_beli * $harga;
                 $update = "UPDATE detil_jual_anggota set jumlah = '$jumlah_beli', sub_total = '$total' 
                 where id_jual_anggota = '0' and status = '0' and id_anggota = '$id_anggota' and id_barang = '$id_barang' "; 
-                // echo "<pre>";
-                    // var_dump($update);
-                // echo "</pre>";
                 mysqli_query($koneksi, $update);
                 echo "
                     <script>
@@ -142,10 +138,34 @@
                 ";
                 $i++;
             }
+        }else if(isset($_POST['potonggaji'])){
+            $i = 0;
+        
+            while ($i < $jmlkeranjang) {
+                $id_anggota = $_POST['id_anggota'][$i];
+                $id_barang = $_POST['id_barang'][$i];
+                $jumlah_beli = $_POST['stok_beli'][$i];
+                $harga = $_POST['harga'][$i];
+                $total = $jumlah_beli * $harga;
+                $update = "UPDATE detil_jual_anggota set jumlah = '$jumlah_beli', sub_total = '$total' 
+                where id_jual_anggota = '0' and status = '0' and id_anggota = '$id_anggota' and id_barang = '$id_barang' "; 
+                mysqli_query($koneksi, $update);
+                echo "
+                    <script>
+                        window.location = 'keranjang_bayarpotong.php?id_ang=$id_anggota';
+                    </script>
+                ";
+                $i++;
+            }
+            echo "
+            <script>
+                alert('Potong Gaji');
+            </script>
+            ";
         }
     ?>
 
-        <?php
+    <?php
         if (isset($_POST['msk_keranjang'])) { //KETIKA DI TEKAN TOMBOL PADA MODAL
             $cek_idbrg = $_POST['id_barang'];
             $q = mysqli_query($koneksi, "SELECT id_barang, status from detil_jual_anggota where status = '0' and id_barang = '$cek_idbrg' and id_anggota = '$id_anggota' ");
