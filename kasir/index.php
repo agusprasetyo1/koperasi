@@ -1,7 +1,7 @@
 <?php
     ini_set("display_errors", 0);   
     $judul = "Koperasi Bahagia";
-    $lokasi1 = "Super Admin";
+    $lokasi1 = "Kasir";
     $lokasi2 = "Dashboard";
     $linklokasi2 = "index.php";
     include "template/header.php";

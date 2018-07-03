@@ -96,7 +96,7 @@
         $id_barang = $data['id_barang'];
         $harga = $data['harga'];
         $id_user = $data['id_user'];
-        $query = "INSERT into detil_jual_umum values ('', '$id_barang', '$id_jual_umum', '$id_user', '$harga', '1', '0', '0')";
+        $query = "INSERT into detil_jual_umum values ('', '$id_barang', '$id_jual_umum', '$id_user', '$harga', '0', '0', '0')";
         mysqli_query($koneksi, $query);        
         return mysqli_affected_rows($koneksi);
     }
