@@ -63,7 +63,7 @@
                             <div class="form-group">
                                 <div>
                                     <label for="bayar">Bayar</label>
-                                    <input type="text" class="form-control" name="bayar" autocomplete = "off" id="bayar" onFocus="mulaihitung();" onBlur="stophitung();" required>
+                                    <input type="text" class="form-control" name="bayar" autofocus="on" autocomplete = "off" id="bayar" onFocus="mulaihitung();" onBlur="stophitung();" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -90,6 +90,7 @@
                             <input type="hidden" name="harga_jual" id="harga_jual" value="<?=$data['harga_jual']?>">
                             <input type="hidden" name="subtotal" id="subtotal" >
                             <input type="hidden" name="tanggal" value="<?= date("Y-m-d") ?>">
+                            <input type="hidden" name="id_user" value="<?= $_SESSION['id_user'] ?>">
                             <input type="submit" name="proses" value="Bayar" class="btn btn-success form-control mt-4">
                     </div>
                     </form>
@@ -122,14 +123,12 @@
             echo "
             <script>
                 alert('Pembayaran gagal');
-                document.location.href = 'tambahbarang.php';            
+                // document.location.href = 'tambahbarang.php';            
             </script>
             ";
             echo("<br>");
             echo mysqli_error($koneksi); 
             }
-            
-            
         }
         
     }

@@ -447,7 +447,6 @@
                         // window.location = 'registrasi.php';
                     </script>
             ";
-            die();
             return false;
         }
 

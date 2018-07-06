@@ -109,7 +109,7 @@ $data = query("SELECT * from barang where id_barang = '$id' ")[0];
                             </div>
 
                             <input type="hidden" name="id_anggota" value="<?=$ambil_id?>">
-                            <input type="hidden" name="id_user" value="US001">
+                            <input type="hidden" name="id_user" value="<?=$_SESSION['id_user']?>">
                             <input type="hidden" name="id_jual_anggota" id="id_jual_umum" value="<?=$kode?>">
                             <input type="hidden" name="stok_awal" value="<?=$data['stok']?>">
                             <input type="hidden" name="id_barang" value="<?=$id?>">

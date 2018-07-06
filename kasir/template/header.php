@@ -2,6 +2,12 @@
   session_start();
   if (!isset($_SESSION['username'])) {
     header('Location: ../');
+  }else if($_SESSION['akses'] != 2){
+    if ($_SESSION['akses'] == 1) {
+      header('Location: ../super/');
+    }else{
+      header('Location: ../admin/');
+    }
   }
 ?>
 <!DOCTYPE html>
@@ -51,7 +57,7 @@
           <div class="dropdown-header text-center">
             <strong>Pengaturan Akun</strong>
           </div>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="./ubahpassword.php">
             <i class="fa fa-key"></i> Ubah password
           </a>
           <a class="dropdown-item" href="../logout.php">

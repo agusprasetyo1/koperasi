@@ -33,7 +33,7 @@
             <input type="hidden" name="id_jual_umum" value="<?= $kode?>">
             <input type="hidden" name="id_barang" value="<?=$id?>">
             <input type="hidden" name="harga" value="<?=$data['harga_jual']?>">
-            <input type="hidden" name="id_user" value="US001">
+            <input type="hidden" name="id_user" value="<?=$_SESSION['id_user']?>">
 
             <div class="btn-group mt-3">
             <button type="submit" name="msk_keranjang" class="btn keranjang">Masukan Keranjang <i class="fa fa-cart-arrow-down"></i></button>
