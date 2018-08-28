@@ -447,6 +447,7 @@
                         // window.location = 'registrasi.php';
                     </script>
             ";
+            die();
             return false;
         }
 
@@ -459,6 +460,7 @@
         return mysqli_affected_rows($koneksi);
     }
 
+    //Kondisi Tambah stok barang
     function tambahstok($data){
         global $koneksi;
         $id_brng = $data['id_barang'];

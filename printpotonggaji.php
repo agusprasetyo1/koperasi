@@ -1,7 +1,7 @@
 <?php
   session_start();
   if (!isset($_SESSION['username'])) {
-    header('Location: ../');
+    header('Location: ./');
   }
 ?>
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
         <div class="col-md-12">
         <?php
             include_once("koneksi/koneksi.php");
-
+            //Mencari total potong gaji setiap anggota bedasarkan bulan dan tahun sekarang 
             $q = mysqli_query($koneksi ,"SELECT a.*, g.*, sum(potongan) as 'potongan_gaji'  from gaji g inner join anggota a on g.id_anggota = a.id_anggota 
             inner join detil_jual_anggota d on g.id_jual_anggota = d.id_jual_anggota WHERE d.status = '2' 
             group by g.id_anggota, month(tgl_potong), year(tgl_potong) order by tgl_potong");
@@ -99,6 +99,7 @@
         </div>
     </div>
 </div>
+
 <script src="js/datatables.min.js"></script>
 <script type='text/javascript'>
         $(document).ready(function () {
@@ -110,17 +111,19 @@
     window.load = print_d();
     function print_d(){
         window.print();
+        // window.location = './super/potonggaji.php'
     }
 </script>
 <?php
     //Pengaturan posisi ketika setelah dilakukanya print data
     if ($_SESSION['akses'] == 1) {
-        echo "<script>window.location = './admin/potonggaji.php'; </script>";
+        // echo "<script>window.location = './super/potonggaji.php'</script>";
     }else if($_SESSION['akses'] == 2){
         echo "<script>window.location = './kasir/potonggaji.php'; </script>";    
     }else{
         echo "<script>window.location = './admin/potonggaji.php'; </script>";    
     }
 ?>
+
 </body>
 </html>

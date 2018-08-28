@@ -51,8 +51,8 @@
         </div>
         <div class="row">
             <?php
-            foreach ($barang as $data) {
-        ?>
+                foreach ($barang as $data) {
+            ?>
 
                 <a href="#" data-id="<?=$data['id_barang']?>" ambil-anggota="<?=$cari['id_anggota']?>" class="card-link edit-record">
                     <div class="col-sm-4 col-lg-3 ">
@@ -197,9 +197,9 @@
             echo("<br>");
             }
         }
-        }
+    }
         ?>
-            <?php
+<?php
     include "template/footer.php";
 ?>
                 <script>

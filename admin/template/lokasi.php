@@ -8,6 +8,4 @@
         <li class="breadcrumb-item">
           <a href="<?=$linklokasi3?>"><?=$lokasi3?></a>
         </li>
-        <!-- <li class="breadcrumb-item active">Dashboard</li> -->
-        <!-- Breadcrumb Menu-->
       </ol>

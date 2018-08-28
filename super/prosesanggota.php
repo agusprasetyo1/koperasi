@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include "fungsitransaksi.php";
     $ambil = $_POST['ambilanggota'];
     $id = $_POST['id'];

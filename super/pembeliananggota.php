@@ -32,7 +32,6 @@
     <div class="row">
         <?php
             foreach ($anggota as $data) {
-                
         ?>
 
         <a href="pilihbarang.php?id=<?=$data['id_anggota']?>" class="card-link edit-record">
@@ -40,7 +39,7 @@
             <div class="brand-card beliumum">
                 <div class="card-body pb-3 mt-3">
                     <div class="brand-card-header">
-                        <img src="../img/anggota/<?=$data['gambar']?>" width="130" height="150" alt="<?=$data['nama']?>">
+                        <img src="../img/anggota/<?=$data['gambar']?>" width="130" height="150" alt="<?=$data['nama']?>"> <!--Gambar-->
                     </div>
                 </div>
                 <div class="brand-card-body">

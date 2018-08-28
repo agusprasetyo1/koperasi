@@ -10,7 +10,7 @@
     include "template/lokasi.php";
     include "fungsitransaksi.php";
 
-    // $bln = 02;
+    //Mencari total potong gaji setiap anggota bedasarkan bulan dan tahun sekarang 
     $gaji = query("SELECT a.*, g.*, sum(potongan) as 'potongan_gaji'  from gaji g inner join anggota a on g.id_anggota = a.id_anggota 
              inner join detil_jual_anggota d on g.id_jual_anggota = d.id_jual_anggota WHERE d.status = '2' 
              group by g.id_anggota, month(tgl_potong), year(tgl_potong) order by tgl_potong");
@@ -20,7 +20,7 @@
     <h2 align="center" class="pt-3 pb-3">Data potong gaji</h2>
     <div class="row justify-content-center">
         <div class="col-sm-12 col-lg-12 ">
-            <a href="../printpotonggaji.php" class="btn btn-primary mb-2">Print data</a>
+            <a href="javascript:window.print()" onclick="style.visibility: hidden" class="btn btn-primary mb-2">Print data</a>
             <table class="table table-striped table-hover table-bordered" id="data">
                 <thead>
                     <tr align="center">

@@ -25,6 +25,7 @@ $q1 = mysqli_query($koneksi ,"SELECT a.id_anggota ,sum(potongan) as 'totalpotong
 $ambilgaji = query("SELECT * from anggota a inner join unit_kerja u on a.id_unit_kerja = u.id_unit_kerja where a.id_anggota = '$ambil_id' ")[0];
 $potonggaji = mysqli_fetch_assoc($q1);
 $cek = mysqli_num_rows($q1);
+//Jika query pada $q1 tidak ada maka total potongan bernilai 0 
 if (isset($_GET['id_ang'])) {
     if ($cek == 1) {
         $total_potongan = $potonggaji['totalpotong'];

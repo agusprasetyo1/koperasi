@@ -11,7 +11,7 @@
         }
         return $rows;
     }
-
+    //Pencarian data barang pada penjualan umum
     function cariumum($data){
         $query = "SELECT * from barang where nama_barang like '%$data%' ";
         return query($query);
@@ -45,7 +45,7 @@
         return $kodebarang;
     }
 
-    //bayar umum
+    //bayar langsung umum
     function bayarumum($data){
         global $koneksi;
         
@@ -89,18 +89,20 @@
         return mysqli_affected_rows($koneksi);
     }
 
+    //Tambah data keranjang pada transaksi umum
     function tambah_keranjang_umum($data){
         global $koneksi;
 
-        $id_jual_umum = $data['id_jual_umum'];
+        // $id_jual_umum = $data['id_jual_umum'];
         $id_barang = $data['id_barang'];
         $harga = $data['harga'];
         $id_user = $data['id_user'];
-        $query = "INSERT into detil_jual_umum values ('', '$id_barang', '$id_jual_umum', '$id_user', '$harga', '1', '0', '0')";
+        $query = "INSERT into detil_jual_umum values ('', '$id_barang', '0', '$id_user', '$harga', '1', '0', '0')";
         mysqli_query($koneksi, $query);        
         return mysqli_affected_rows($koneksi);
     }
 
+    //Membayar data pada keranjang transaksi umum
     function bayar_keranjang_umum($data){
         global $koneksi;
         $id_jual_umum = $data['id_jual_umum'];
@@ -108,18 +110,20 @@
         $tanggal = date("Y-m-d");
 
         $query1 = "INSERT into jual_umum values ('$id_jual_umum', '$tanggal', '$total_semua') ";
-        $query2 = "UPDATE detil_jual_umum SET status = '1' where id_jual_umum = '$id_jual_umum' and status = '0' ";
+        $query2 = "UPDATE detil_jual_umum SET status = '1', id_jual_umum = '$id_jual_umum' where id_jual_umum = '0' and status = '0' ";
         mysqli_query($koneksi, $query1);
         mysqli_query($koneksi, $query2);
 
         return mysqli_affected_rows($koneksi);
     }
 
+    //Pencarian anggota
     function carianggota($data){
         $query = "SELECT * from anggota a inner join unit_kerja u on a.id_unit_kerja = u.id_unit_kerja where nama like '%$data%' ";
         return query($query);
     }
 
+    //Tambah data keranjang pada transaksi Anggota
     function tambah_keranjang_anggota($data){
         global $koneksi;
 
@@ -134,7 +138,7 @@
         return mysqli_affected_rows($koneksi);
     }
 
-    //bayar Anggota
+    //bayar langsung Anggota
     function bayarlangsung_anggota($data){
         global $koneksi;
         
@@ -160,7 +164,7 @@
         return mysqli_affected_rows($koneksi);        
     }
 
-    //Bayar keranjang anggota
+    //Bayar keranjang pada transaksi anggota
     function bayarlangsung_keranjang_anggota($data){
         global $koneksi;
 
@@ -207,6 +211,7 @@
         return mysqli_affected_rows($koneksi);        
     }
     
+    //Melakukan pembayaran data keranjang dengan potong gaji
     function potonggaji_keranjang_anggota($data){
         global $koneksi;
 

@@ -1,6 +1,6 @@
 <?php
     $judul = "Koperasi Bahagia";
-    $lokasi1 = "Admin";
+    $lokasi1 = "Super Admin";
     $lokasi2 = "Potong Gaji";
     $lokasi3 = "";
     $linklokasi2 = "";

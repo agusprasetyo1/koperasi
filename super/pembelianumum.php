@@ -126,7 +126,9 @@
             $cek_idbrg = $_POST['id_barang'];
             $q = mysqli_query($koneksi, "SELECT id_barang, status from detil_jual_umum where status = '0' and id_barang = '$cek_idbrg' ");
             $cek = mysqli_num_rows($q);
-    
+            echo "<pre>";
+                var_dump($_POST);
+            echo "</pre>";
             if ($cek > 0) {
                 echo "
                 <script>
@@ -135,6 +137,7 @@
                 </script>
                 ";
             }else{
+                //fungsi Transaksi
             if (tambah_keranjang_umum($_POST) > 0) {
                 echo "
                     <script>
@@ -145,7 +148,7 @@
             }else{
                 echo "
                 <script>
-                // alert('Input keranjang gagal');
+                alert('Input keranjang gagal');
                 // document.location.href = 'tambahanggota.php';            
                 </script>
                 ";

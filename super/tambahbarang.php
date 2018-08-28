@@ -81,7 +81,6 @@
     function hapus() {
         
         document.getElementById('hargajual').value = '';
-        // document.getElementById('nama').value = 'sadasd';
     }
 </script>
 <?php

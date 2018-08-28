@@ -38,7 +38,7 @@
     <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="./">
       <img class="navbar-brand-full" src="../img/logo.png" width="150" height="50" alt="CoreUI Logo">
       <img class="navbar-brand-minimized" src="../img/favicon.png" width="45" height="45" alt="CoreUI Logo">
     </a>

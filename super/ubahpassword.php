@@ -53,11 +53,10 @@
             }
             $password = password_hash($passwordbaru,PASSWORD_DEFAULT);
             mysqli_query($koneksi, "UPDATE user SET password = '$password' where id_user = '$id_user' ");
-            
             if (mysqli_affected_rows($koneksi) > 0) {
                 echo "<script>
                 alert('Password berhasil dirubah');
-                window.location = './
+                window.location = './';
                 </script>";
             }
         }else{

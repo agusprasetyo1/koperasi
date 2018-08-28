@@ -46,7 +46,7 @@
                     $a = 0;    
                     while ($data = mysqli_fetch_assoc($q1)) {
                         $total_semua += $data['sub_total'];
-                        ?>
+                ?>
                         
                     <div class="row mb-2 justify-content-center">
                         <div class="col-md-3">

@@ -117,7 +117,6 @@
 
                         <input type="hidden" name="semua" id="semua" value="<?=$total_semua?>">
                         <input type="hidden" name="id_jual_umum" value="<?=$kode?>">
-                        
                 </div>
                 </form>
             </div>
@@ -147,6 +146,9 @@
                 mysqli_query($koneksi, $query);
                 $i++;
             }
+            echo "<pre>";
+            var_dump($_POST);
+            echo "</pre>";
             if (bayar_keranjang_umum($_POST) > 0) {
                 echo "
                 <script>

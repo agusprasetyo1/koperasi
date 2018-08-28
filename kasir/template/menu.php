@@ -31,7 +31,7 @@
               <i class="nav-icon fa fa-dollar"></i> Potong Gaji Anggota</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="rekapitulasi.php">
               <i class="nav-icon icon-doc"></i> Rekapitulasi data</a>
           </li>
         </ul>

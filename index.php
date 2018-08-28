@@ -14,7 +14,7 @@
     <link href="vendors/css/flag-icon.min.css" rel="stylesheet">
     <link href="vendors/css/font-awesome.min.css" rel="stylesheet">
     <link href="vendors/css/simple-line-icons.css" rel="stylesheet">
-    <!-- Main styles for this application-->
+    <!-- Main styles for this Papplication-->
     <link href="css/style.css" rel="stylesheet">
     <link href="vendors/css/pace.min.css" rel="stylesheet">
   </head>
@@ -22,7 +22,7 @@
   <body class="app flex-row align-items-center">
   <div class="container">
     <!-- <h1 align="center">Login</h1> -->
-      <div class="row justify-content-center">
+<div class="row justify-content-center">
         <div class="col-md-5">
           <div class="card-group">
             <div class="card p-2">

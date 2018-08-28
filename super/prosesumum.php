@@ -1,4 +1,5 @@
 <?php
+session_start();
     include "fungsitransaksi.php";
     $id = $_POST['id'];
     $data = query("SELECT * from barang b inner join jenis_barang j on b.id_jenis_barang = j.id_jenis_barang where id_barang = '$id' ")[0];
@@ -30,7 +31,6 @@
 
                     
         <form action="" method="post">
-            <input type="hidden" name="id_jual_umum" value="<?= $kode?>">
             <input type="hidden" name="id_barang" value="<?=$id?>">
             <input type="hidden" name="harga" value="<?=$data['harga_jual']?>">
             <input type="hidden" name="id_user" value="<?=$_SESSION['id_user']?>">

@@ -3,7 +3,6 @@
     $ambil = $_POST['idanggota'];
     $bln = $_POST['ambilbln'];
     $thn = $_POST['ambilthn'];
-    //Mengambil data total harga yang dibeli dengan potong gaji
     $q1 = mysqli_query($koneksi, "SELECT j.*, a.*, d.*,sum(sub_total) as 'total', sum(jumlah) as 'jumlahbeli'  FROM gaji j inner join anggota a on j.id_anggota = a.id_anggota inner join detil_jual_anggota d
             on d.id_jual_anggota = j.id_jual_anggota where d.status = '2' and d.id_anggota = '$ambil'and month(tgl_potong) = '$bln' and year(tgl_potong) = '$thn' group by id_barang ");
     ?>
