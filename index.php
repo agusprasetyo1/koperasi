@@ -61,7 +61,7 @@
                                   $data = mysqli_fetch_assoc($q);
                                     if (password_verify($password, $data['password'])) { //Mengecek password
                                         $akses = $data['akses'];
-
+                                        
                                         $_SESSION['id_user'] = $data['id_user'];
                                         $_SESSION['username'] = $data['username'];
                                         $_SESSION['akses'] = $data['akses'];

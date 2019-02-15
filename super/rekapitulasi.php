@@ -1,7 +1,7 @@
 <?php
     $judul = "Koperasi Bahagia";
     $lokasi1 = "Super Admin";
-    $lokasi2 = "Potong Gaji";
+    $lokasi2 = "Rekapitulasi";
     $lokasi3 = "";
     $linklokasi2 = "";
     $linklokasi3 = "";
@@ -12,11 +12,12 @@
 
     // Menghitung jumlah barang yang dijual bedasarkan bulan dan tahun transaksi
     $q1 = mysqli_query($koneksi ,"SELECT sum(d.jumlah) as 'jml', b.*, j.*  FROM detil_jual_umum d inner join jual_umum j on j.id_jual_umum = d.id_jual_umum
-    inner join barang b on b.id_barang = d.id_barang group by d.id_barang , month(j.tgl_transaksi), year(j.tgl_transaksi) order by tgl_transaksi ");
+    inner join barang b on b.id_barang = d.id_barang group by d.id_barang , month(j.tgl_transaksi), year(j.tgl_transaksi) order by tgl_transaksi");
     
 ?>
 <div class="container-fluid">
     <h2 align="center" class="pt-3 pb-3">Rekapitulasi</h2>
+    
     <div class="row justify-content-center">
         <div class="col-sm-12 col-lg-12 ">
             <table class="table table-striped table-hover table-bordered table-align-middle" id="data">
@@ -92,8 +93,8 @@
 <?php
     include "template/footer.php";
 ?>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function () {
         $('#data').DataTable();
     });
-</script>
+</script> -->
